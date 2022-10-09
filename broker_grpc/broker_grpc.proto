@@ -1,0 +1,37 @@
+syntax = "proto3";
+
+package broker;
+
+service Broker
+{
+  rpc CreateChannel(Channel) returns (BrokerResult) {}
+  rpc GetChannels(Empty) returns (ChannelNames) {}
+  rpc PublishMessage(Message) returns (BrokerResult) {}
+  rpc Subscribe(stream Channel) returns (stream Message) {}
+}
+
+message Empty {}
+
+message Channel
+{
+  string name = 1;
+}
+
+message ChannelNames
+{
+  repeated string names = 1;
+}
+
+message Message
+{
+  string channelName = 1;
+  string body = 2;
+}
+
+message BrokerResult
+{
+  string status = 1;
+  string reason = 2;
+}
+
+

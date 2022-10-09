@@ -1,0 +1,69 @@
+Broker operations:
+
+1. Create channel
+
+   CLIENT:
+   {
+      "QUERY_TYPE" : "create_channel",
+      "CHANNEL_NAME" : "ExampleChannel1"
+   }
+
+   BROKER:
+   {
+      "QUERY_TYPE" : "create_channel",
+      "STATUS" : "ok"
+   }
+
+2. Get Channel Names
+
+   CLIENT:
+   {
+      "QUERY_TYPE" : "get_channel_names",
+   }
+
+   BROKER:
+   {
+      "QUERY_TYPE" : "get_channel_names",
+      "CHANNELS" : [ "ExampleChannel1", "ExampleChannel2", "ExampleChannel3" ]
+   }
+
+3. Publish Message
+
+   CLIENT:
+   {
+      "QUERY_TYPE" : "publish_msg",
+      "MSG_BODY" : "ExampleMsgText"
+   }
+
+   BROKER:
+   {
+      "QUERY_TYPE" : "publish_msg",
+      "STATUS" : "ok"
+   }
+
+4. Subscribe
+
+   CLIENT:
+   {
+      "QUERY_TYPE" : "subscribe",
+      "CHANNEL_NAME" : "ExampleChannel1"
+   }
+
+   BROKER:
+   {
+      "QUERY_TYPE" : "messages_for_subscriber",
+      "CHANNEL_NAME" : "ExampleChannel1",
+      "MSG_BODY_ARRAY" : [ "ExampleMsg1", "ExampleMsg2", "ExampleMsg3" ]
+   }
+
+   {
+      "QUERY_TYPE" : "subscribe",
+      "STATUS" : "ok"
+   }
+
+   Broker Notification:
+   {
+      "QUERY_TYPE" : "message_for_subscriber",
+      "CHANNEL_NAME" : "ExampleChannel1",
+      "MSG_BODY" : "ExampleMsgText"
+   }
